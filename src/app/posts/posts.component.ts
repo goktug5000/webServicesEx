@@ -36,8 +36,23 @@ export class PostsComponent {
 
   updatePost(inputt:any){
     inputt.title='updated';
-    this.http.put(this.mainUrl + "/" + inputt.id, JSON.stringify(inputt));
+
+    //veri küçükse fark etmez, objeyi tam değiştiriyor üstüne yazarak
+    //this.http.put(this.mainUrl + "/" + inputt.id, JSON.stringify(inputt)).subscribe(response=> console.log(response));
+
+    //objeyi sadece bir kısmını güncelliyor veri dostu
+    this.http.patch(this.mainUrl + "/" + inputt.id, JSON.stringify(inputt)).subscribe(response=> console.log(response));
   }
 
+
+
+  deletePost(inputt:any){
+    this.http.delete(this.mainUrl + "/" + inputt.id).subscribe(response=> {
+      console.log(response);
+      let index=this.post.indexOf(inputt);
+      this.post.splice(index,1);
+
+    });
+  }
 
 }

@@ -3,6 +3,7 @@
 <ul>
     <li *ngFor="let postt of post">
         <button (click)="updatePost(postt)">update</button>
+        <button (click)="deletePost(postt)">del</button>
         {{postt.title}}
     </li>
 </ul>
