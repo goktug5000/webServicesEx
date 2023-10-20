@@ -31,8 +31,13 @@ export class PostsComponent {
       this.post.splice(0,0,post);
       console.log(post);
     });
-
-
-
   }
+
+
+  updatePost(inputt:any){
+    inputt.title='updated';
+    this.http.put(this.mainUrl + "/" + inputt.id, JSON.stringify(inputt));
+  }
+
+
 }

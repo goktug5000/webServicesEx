@@ -2,6 +2,7 @@
 <input type="text" #input1 (keyup.enter)="createPost(input1)">
 <ul>
     <li *ngFor="let postt of post">
+        <button (click)="updatePost(postt)">update</button>
         {{postt.title}}
     </li>
 </ul>
