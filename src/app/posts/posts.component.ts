@@ -9,6 +9,7 @@ import { PostService } from '../services/post.service';
 })
 export class PostsComponent implements OnInit {
 
+  error:any;
 
   post:[any]=[""];
 
@@ -21,18 +22,43 @@ export class PostsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe(response=>this.post=<[any]>response);
+    this.postService.getPosts()
+      .subscribe(
+        response => { this.post = <[any]>response }
+        ,
+        error => { 
+          error.message+=' post.compnents.ts.ngOnInit()';
+          this.error = error;
+         }
+      );
   }
   
-  createPost(inputt:HTMLInputElement){
-    const post={title:inputt.value};
-    inputt.value='';
-    this.postService.createPost(post).subscribe(response=> console.log(response));
+  createPost(inputt: HTMLInputElement) {
+    const post = { title: inputt.value };
+    inputt.value = '';
+    this.postService.createPost(post).subscribe(response => {
+      console.log(response);
+      this.post.splice(0, 0, post);
+    }
+      ,
+      error => { 
+        error.message+=' post.compnents.ts.createPost()';
+        this.error = error;
+       }
+    );
   }
 
 
   updatePost(postt:any){
-    this.postService.updatePost(postt).subscribe(response=> console.log(response));
+    this.postService.updatePost(postt).subscribe(response => {
+      console.log(response);
+    }
+      ,
+      error => { 
+        error.message+=' post.compnents.ts.updatePost()';
+        this.error = error;
+       }
+    );
 
 
 

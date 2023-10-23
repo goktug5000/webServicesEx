@@ -1,4 +1,9 @@
 <p>posts works!</p>
+
+<div class="alert alert-danger" *ngIf="error">
+    {{error['message']}}
+</div>
+
 <input type="text" #input1 (keyup.enter)="createPost(input1)">
 <ul>
     <li *ngFor="let postt of post">
